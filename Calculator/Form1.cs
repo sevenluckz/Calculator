@@ -12,6 +12,9 @@ namespace Calculator {
     public partial class Form1 : Form {
         public Form1() { InitializeComponent(); }
 
+        int num1, num2, outp;
+        Boolean cleared = true;
+
         private Boolean checkBox() {
             char[] foo = sumBox.Text.ToArray();
             if (foo[sumBox.TextLength-1] == '+' || foo[sumBox.TextLength-1] == '-' || foo[sumBox.TextLength-1] == '/' || foo[sumBox.TextLength-1] == '*') { return true; }
@@ -19,9 +22,21 @@ namespace Calculator {
         }
 
         private void addChar(string num) {
-            if (sumBox.TextLength == 0 && (num.Equals("0") || num.Equals("+") || num.Equals("-") || num.Equals("*") || num.Equals("/"))) { }
-            else if ((num.Equals("+")&&checkBox())||(num.Equals("-")&&checkBox())||(num.Equals("/")&&checkBox())||(num.Equals("*")&&checkBox())) { }
-            else { sumBox.Text = sumBox.Text + num; }
+            if (!cleared) { sumBox.Clear(); cleared = true; }
+                if (sumBox.TextLength == 0 && (num.Equals("0"))) { }
+                else { sumBox.Text = sumBox.Text + num; }
+        }
+
+        private void process(string op) {
+            if (num1 == null) { num1 = Convert.ToInt32(sumBox.Text); }
+            else { num2 = Convert.ToInt32(sumBox.Text); }
+            sumBox.Clear();
+            if (num1 != null && num2 != null) {
+                sumBox.Text = (num1 + num2).ToString();
+                num1 = Convert.ToInt32(null);
+                num2 = Convert.ToInt32(null);
+                cleared = false;
+            }
         }
 
         private void zeroBtn_Click(object sender, EventArgs e) { addChar("0"); }
@@ -53,7 +68,7 @@ namespace Calculator {
 
         private void clearBtn_Click(object sender, EventArgs e) { sumBox.Clear(); }
 
-        private void multiplyBtn_Click(object sender, EventArgs e) { addChar("*"); }
+        private void multiplyBtn_Click(object sender, EventArgs e) { process("+"); }
 
         private void divideBtn_Click(object sender, EventArgs e) { addChar("/"); }
 
