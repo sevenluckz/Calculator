@@ -46,6 +46,7 @@
             this.addBtn = new System.Windows.Forms.Button();
             this.equalsBtn = new System.Windows.Forms.Button();
             this.backspcBtn = new System.Windows.Forms.Button();
+            this.periodBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // sumBox
@@ -170,7 +171,7 @@
             // subtractBtn
             // 
             this.subtractBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
-            this.subtractBtn.Location = new System.Drawing.Point(172, 194);
+            this.subtractBtn.Location = new System.Drawing.Point(222, 194);
             this.subtractBtn.Name = "subtractBtn";
             this.subtractBtn.Size = new System.Drawing.Size(46, 46);
             this.subtractBtn.TabIndex = 11;
@@ -203,18 +204,18 @@
             // clearBtn
             // 
             this.clearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
-            this.clearBtn.Location = new System.Drawing.Point(221, 92);
+            this.clearBtn.Location = new System.Drawing.Point(222, 40);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(50, 45);
             this.clearBtn.TabIndex = 14;
-            this.clearBtn.Text = "C";
+            this.clearBtn.Text = "R";
             this.clearBtn.UseVisualStyleBackColor = true;
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // addBtn
             // 
             this.addBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
-            this.addBtn.Location = new System.Drawing.Point(222, 142);
+            this.addBtn.Location = new System.Drawing.Point(221, 91);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(50, 98);
             this.addBtn.TabIndex = 15;
@@ -225,29 +226,42 @@
             // equalsBtn
             // 
             this.equalsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
-            this.equalsBtn.Location = new System.Drawing.Point(65, 195);
+            this.equalsBtn.Location = new System.Drawing.Point(115, 194);
             this.equalsBtn.Name = "equalsBtn";
             this.equalsBtn.Size = new System.Drawing.Size(101, 45);
             this.equalsBtn.TabIndex = 16;
             this.equalsBtn.Text = "=";
             this.equalsBtn.UseVisualStyleBackColor = true;
+            this.equalsBtn.Click += new System.EventHandler(this.equalsBtn_Click);
             // 
             // backspcBtn
             // 
             this.backspcBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
             this.backspcBtn.Location = new System.Drawing.Point(172, 40);
             this.backspcBtn.Name = "backspcBtn";
-            this.backspcBtn.Size = new System.Drawing.Size(99, 45);
+            this.backspcBtn.Size = new System.Drawing.Size(43, 45);
             this.backspcBtn.TabIndex = 17;
             this.backspcBtn.Text = "←";
             this.backspcBtn.UseVisualStyleBackColor = true;
             this.backspcBtn.Click += new System.EventHandler(this.backspcBtn_Click);
+            // 
+            // periodBtn
+            // 
+            this.periodBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
+            this.periodBtn.Location = new System.Drawing.Point(65, 194);
+            this.periodBtn.Name = "periodBtn";
+            this.periodBtn.Size = new System.Drawing.Size(46, 45);
+            this.periodBtn.TabIndex = 18;
+            this.periodBtn.Text = ".";
+            this.periodBtn.UseVisualStyleBackColor = true;
+            this.periodBtn.Click += new System.EventHandler(this.periodBtn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.periodBtn);
             this.Controls.Add(this.backspcBtn);
             this.Controls.Add(this.equalsBtn);
             this.Controls.Add(this.addBtn);
@@ -267,7 +281,7 @@
             this.Controls.Add(this.oneBtn);
             this.Controls.Add(this.sumBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Calculator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,6 +307,7 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button equalsBtn;
         private System.Windows.Forms.Button backspcBtn;
+        private System.Windows.Forms.Button periodBtn;
     }
 }
 

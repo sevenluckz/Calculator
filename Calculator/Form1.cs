@@ -12,8 +12,9 @@ namespace Calculator {
     public partial class Form1 : Form {
         public Form1() { InitializeComponent(); }
 
-        int num1, num2, outp;
+        double num1 = double.MinValue, num2 = double.MinValue;
         Boolean cleared = true;
+        string op1 = "", op2 = "";
 
         private Boolean checkBox() {
             char[] foo = sumBox.Text.ToArray();
@@ -23,19 +24,29 @@ namespace Calculator {
 
         private void addChar(string num) {
             if (!cleared) { sumBox.Clear(); cleared = true; }
-                if (sumBox.TextLength == 0 && (num.Equals("0"))) { }
+                if (sumBox.TextLength == 0 && num.Equals(".")) { sumBox.Text = "0."; }
+                else if (sumBox.TextLength > 0 && sumBox.Text.Contains(".") && num.Equals(".")) { }
+                else if (sumBox.TextLength == 1 && sumBox.Text.Equals("0") && !num.Equals(".")) { sumBox.Clear(); sumBox.Text = num; }
                 else { sumBox.Text = sumBox.Text + num; }
         }
 
         private void process(string op) {
-            if (num1 == null) { num1 = Convert.ToInt32(sumBox.Text); }
-            else { num2 = Convert.ToInt32(sumBox.Text); }
+            op2 = op1;
+            op1 = op;
+            if (num2 == double.MinValue) { num2 = Convert.ToDouble(sumBox.Text); }
+            else if (num2 != double.MinValue) { num1 = num2; num2 = Convert.ToDouble(sumBox.Text); }
             sumBox.Clear();
-            if (num1 != null && num2 != null) {
-                sumBox.Text = (num1 + num2).ToString();
-                num1 = Convert.ToInt32(null);
-                num2 = Convert.ToInt32(null);
-                cleared = false;
+            if (num1 != double.MinValue && num2 != double.MinValue) {
+                if (op2.Equals("+")) { sumBox.Text = (num1 + num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                else if (op1.Equals("-")) { sumBox.Text = (num1 - num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                else if (op1.Equals("*")) { sumBox.Text = (num1 * num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                else if (op1.Equals("/")) { sumBox.Text = (num1 / num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                else if (op1.Equals("=")) {
+                    if (op2.Equals("+")) { sumBox.Text = (num1 + num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                    else if (op2.Equals("-")) { sumBox.Text = (num1 - num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                    else if (op2.Equals("*")) { sumBox.Text = (num1 * num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                    else if (op2.Equals("/")) { sumBox.Text = (num1 / num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                }
             }
         }
 
@@ -66,14 +77,18 @@ namespace Calculator {
             sumBox.Text = bar;
         }
 
-        private void clearBtn_Click(object sender, EventArgs e) { sumBox.Clear(); }
+        private void clearBtn_Click(object sender, EventArgs e) { sumBox.Clear(); cleared = true; num1 = double.MinValue; num2 = double.MinValue; }
 
-        private void multiplyBtn_Click(object sender, EventArgs e) { process("+"); }
+        private void multiplyBtn_Click(object sender, EventArgs e) { process("*"); }
 
-        private void divideBtn_Click(object sender, EventArgs e) { addChar("/"); }
+        private void divideBtn_Click(object sender, EventArgs e) { process("/"); }
 
-        private void subtractBtn_Click(object sender, EventArgs e) { addChar("-"); }
+        private void subtractBtn_Click(object sender, EventArgs e) { process("-"); }
 
-        private void addBtn_Click(object sender, EventArgs e) { addChar("+"); }
+        private void addBtn_Click(object sender, EventArgs e) { process("+"); }
+
+        private void equalsBtn_Click(object sender, EventArgs e) { if (num2 != double.MinValue) { process("="); } }
+
+        private void periodBtn_Click(object sender, EventArgs e) { addChar("."); }
     }
 }
