@@ -12,22 +12,24 @@ namespace Calculator {
     public partial class Form1 : Form {
         public Form1() { InitializeComponent(); }
 
+        /// <summary>
+        /// Declares & Initialises the num1, num2, cleared, op1 and op2 variables.
+        /// </summary>
+        /// <remarks>
+        /// Doubles num1 & num2 hold the numbers while working with them.
+        /// Boolean cleared say if the form needs to be cleared when adding a number to the sumBox.
+        /// Strings op1 & op2 hold the operators selected while working with them.
+        /// </remarks>
         double num1 = double.MinValue, num2 = double.MinValue;
         Boolean cleared = true;
         string op1 = "", op2 = "";
 
-        private Boolean checkBox() {
-            char[] foo = sumBox.Text.ToArray();
-            if (foo[sumBox.TextLength-1] == '+' || foo[sumBox.TextLength-1] == '-' || foo[sumBox.TextLength-1] == '/' || foo[sumBox.TextLength-1] == '*') { return true; }
-            else { return false; }
-        }
-
         private void addChar(string num) {
-            if (!cleared) { sumBox.Clear(); cleared = true; }
-                if (sumBox.TextLength == 0 && num.Equals(".")) { sumBox.Text = "0."; }
-                else if (sumBox.TextLength > 0 && sumBox.Text.Contains(".") && num.Equals(".")) { }
-                else if (sumBox.TextLength == 1 && sumBox.Text.Equals("0") && !num.Equals(".")) { sumBox.Clear(); sumBox.Text = num; }
-                else { sumBox.Text = sumBox.Text + num; }
+            if (!cleared) { num1 = num2; num2 = Convert.ToDouble(sumBox.Text); sumBox.Clear(); cleared = true; }
+            if (sumBox.TextLength == 0 && num.Equals(".")) { sumBox.Text = "0."; }
+            else if (sumBox.TextLength > 0 && sumBox.Text.Contains(".") && num.Equals(".")) { }
+            else if (sumBox.TextLength == 1 && sumBox.Text.Equals("0") && !num.Equals(".")) { sumBox.Clear(); sumBox.Text = num; }
+            else { sumBox.Text = sumBox.Text + num; }
         }
 
         private void process(string op) {
@@ -41,9 +43,9 @@ namespace Calculator {
             if (num1 != double.MinValue && num2 != double.MinValue)
             {
                 if (op2.Equals("+")) { sumBox.Text = (num1 + num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
-                else if (op1.Equals("-")) { sumBox.Text = (num1 - num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
-                else if (op1.Equals("*")) { sumBox.Text = (num1 * num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
-                else if (op1.Equals("/"))
+                else if (op2.Equals("-")) { sumBox.Text = (num1 - num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                else if (op2.Equals("*")) { sumBox.Text = (num1 * num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                else if (op2.Equals("/"))
                 {
                     if (num2.ToString().Equals("0")) { sumBox.Text = "Cannot Divide By Zero!"; cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
                     else { sumBox.Text = (num1 / num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
@@ -97,7 +99,7 @@ namespace Calculator {
         private void divideBtn_Click(object sender, EventArgs e) { process("/"); }
 
         private void subtractBtn_Click(object sender, EventArgs e) {
-            if (sumBox.TextLength.Equals(0)) { addChar("-"); }
+            if (sumBox.TextLength.Equals(0) || op1 != "-" ) { addChar("-"); }
             else if (sumBox.TextLength == 1 && !sumBox.Text.Equals("-")) { process("-"); }
             else if (sumBox.TextLength > 1) { process("-"); }
         }
