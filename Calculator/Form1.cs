@@ -33,21 +33,34 @@ namespace Calculator {
         private void process(string op) {
             op2 = op1;
             op1 = op;
+            if (sumBox.Text.Equals("Cannot Divide By Zero!")) {  }
+            else {
             if (num2 == double.MinValue) { num2 = Convert.ToDouble(sumBox.Text); }
             else if (num2 != double.MinValue) { num1 = num2; num2 = Convert.ToDouble(sumBox.Text); }
             sumBox.Clear();
-            if (num1 != double.MinValue && num2 != double.MinValue) {
+            if (num1 != double.MinValue && num2 != double.MinValue)
+            {
                 if (op2.Equals("+")) { sumBox.Text = (num1 + num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
                 else if (op1.Equals("-")) { sumBox.Text = (num1 - num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
                 else if (op1.Equals("*")) { sumBox.Text = (num1 * num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
-                else if (op1.Equals("/")) { sumBox.Text = (num1 / num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
-                else if (op1.Equals("=")) {
+                else if (op1.Equals("/"))
+                {
+                    if (num2.ToString().Equals("0")) { sumBox.Text = "Cannot Divide By Zero!"; cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                    else { sumBox.Text = (num1 / num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                }
+                else if (op1.Equals("="))
+                {
                     if (op2.Equals("+")) { sumBox.Text = (num1 + num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
                     else if (op2.Equals("-")) { sumBox.Text = (num1 - num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
                     else if (op2.Equals("*")) { sumBox.Text = (num1 * num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
-                    else if (op2.Equals("/")) { sumBox.Text = (num1 / num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                    else if (op2.Equals("/"))
+                    {
+                        if (num2.ToString().Equals("0")) { sumBox.Text = "Cannot Divide By Zero!"; cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                        else { sumBox.Text = (num1 / num2).ToString(); cleared = false; num1 = double.MinValue; num2 = double.MinValue; }
+                    }
                 }
             }
+        }
         }
 
         private void zeroBtn_Click(object sender, EventArgs e) { addChar("0"); }
