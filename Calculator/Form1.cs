@@ -96,7 +96,11 @@ namespace Calculator {
 
         private void divideBtn_Click(object sender, EventArgs e) { process("/"); }
 
-        private void subtractBtn_Click(object sender, EventArgs e) { process("-"); }
+        private void subtractBtn_Click(object sender, EventArgs e) {
+            if (sumBox.TextLength.Equals(0)) { addChar("-"); }
+            else if (sumBox.TextLength == 1 && !sumBox.Text.Equals("-")) { process("-"); }
+            else if (sumBox.TextLength > 1) { process("-"); }
+        }
 
         private void addBtn_Click(object sender, EventArgs e) { process("+"); }
 
