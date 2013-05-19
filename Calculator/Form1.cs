@@ -36,7 +36,12 @@ namespace Calculator {
         /// </remarks>
         /// <param name="num">string This is the char to add to sumBox</param>
         private void addChar(string num) {
-            if (!cleared) { num1 = num2; num2 = Convert.ToDouble(sumBox.Text); sumBox.Clear(); cleared = true; }
+            if (!cleared) { 
+                num1 = num2;
+                if (sumBox.TextLength != 0) { num2 = Convert.ToDouble(sumBox.Text); }
+                sumBox.Clear();
+                cleared = true;
+            }
             if (sumBox.TextLength == 0 && num.Equals(".")) { sumBox.Text = "0."; }
             else if (sumBox.TextLength > 0 && sumBox.Text.Contains(".") && num.Equals(".")) { }
             else if (sumBox.TextLength == 1 && sumBox.Text.Equals("0") && !num.Equals(".")) { sumBox.Clear(); sumBox.Text = num; }
@@ -215,7 +220,7 @@ namespace Calculator {
         /// Finally, if the first two conditions aren't met it will check on the text length is greater then 1. If so it will again run the process meathod with the minus operator.
         /// </remarks>
         private void subtractBtn_Click(object sender, EventArgs e) {
-            if (sumBox.TextLength == 0) { addChar("-"); }
+            if (sumBox.TextLength == 0 || (sumBox.TextLength == 0 && op1 != "-")) { addChar("-"); }
             else if (sumBox.TextLength == 1 && !sumBox.Text.Equals("-")) { process("-"); }
             else if (sumBox.TextLength > 1) { process("-"); }
         }
