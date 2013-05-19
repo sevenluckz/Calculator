@@ -210,12 +210,12 @@ namespace Calculator {
         /// Event Handler code for a button press.
         /// </summary>
         /// <remarks>
-        /// This first checks if the length of the text in sumBox is equal to zero or not equal to "-". If so it adds the "-" character to sumBox.
+        /// This first checks if the length of the text in sumBox is equal to zero. If so it adds the "-" character to sumBox.
         /// If the first condition isn't met it then checks if the length of text in sumBox is equal to 1 and that the first char is not equal to "-". If so it will run the process meathod with the minus operator.
         /// Finally, if the first two conditions aren't met it will check on the text length is greater then 1. If so it will again run the process meathod with the minus operator.
         /// </remarks>
         private void subtractBtn_Click(object sender, EventArgs e) {
-            if (sumBox.TextLength.Equals(0) || op1 != "-" ) { addChar("-"); }
+            if (sumBox.TextLength == 0) { addChar("-"); }
             else if (sumBox.TextLength == 1 && !sumBox.Text.Equals("-")) { process("-"); }
             else if (sumBox.TextLength > 1) { process("-"); }
         }

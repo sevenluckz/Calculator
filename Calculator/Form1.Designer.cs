@@ -173,7 +173,7 @@
             this.subtractBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.subtractBtn.Location = new System.Drawing.Point(222, 194);
             this.subtractBtn.Name = "subtractBtn";
-            this.subtractBtn.Size = new System.Drawing.Size(46, 46);
+            this.subtractBtn.Size = new System.Drawing.Size(50, 46);
             this.subtractBtn.TabIndex = 11;
             this.subtractBtn.Text = "-";
             this.subtractBtn.UseVisualStyleBackColor = true;
@@ -206,7 +206,7 @@
             this.clearBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F);
             this.clearBtn.Location = new System.Drawing.Point(222, 40);
             this.clearBtn.Name = "clearBtn";
-            this.clearBtn.Size = new System.Drawing.Size(50, 45);
+            this.clearBtn.Size = new System.Drawing.Size(49, 45);
             this.clearBtn.TabIndex = 14;
             this.clearBtn.Text = "R";
             this.clearBtn.UseVisualStyleBackColor = true;
